@@ -32,15 +32,18 @@ function random(min, max) {
 }
 
 function Artiference() {
-    var data1 = [];
-    var data2 = [];
-    var data3 = [];
-    var elements = 27;
+    const [state, setState] = useState({
+        data1: [],
+        data2: [],
+        data3: [],
+        elements: 27,
+    });
 
-    for (var i = 0; i <= elements; i++) {
-        data1.push(random(50, 200));
-        data2.push(random(80, 100));
-        data3.push(65);
+
+    for (var i = 0; i <= state.elements; i++) {
+        state.data1.push(random(50, 200));
+        state.data2.push(random(80, 100));
+        state.data3.push(65);
     }
     const brandPrimary = getStyle('--primary')
     const brandSuccess = getStyle('--success')
@@ -59,7 +62,7 @@ function Artiference() {
                 borderColor: brandInfo,
                 pointHoverBackgroundColor: '#fff',
                 borderWidth: 2,
-                data: data1,
+                data: state.data1,
             },
             {
                 label: 'My Second dataset',
@@ -67,7 +70,7 @@ function Artiference() {
                 borderColor: brandSuccess,
                 pointHoverBackgroundColor: '#fff',
                 borderWidth: 2,
-                data: data2,
+                data: state.data2,
             },
             {
                 label: 'My Third dataset',
@@ -76,7 +79,7 @@ function Artiference() {
                 pointHoverBackgroundColor: '#fff',
                 borderWidth: 1,
                 borderDash: [8, 5],
-                data: data3,
+                data: state.data3,
             },
         ],
     };
@@ -137,16 +140,34 @@ function Artiference() {
     }, []);
 
     return (
-        <>
+        <ul>
             <Row>
-                <CardBody>
-                    <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-                        <Line data={mainChart} options={mainChartOpts} height={300} />
-                    </div>
-                </CardBody>
-                {value}
+                <Card>
+                    {value}
+                    <CardBody>
+                        <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
+                            <Line data={mainChart} options={mainChartOpts} height={300} />
+                        </div>
+                    </CardBody>
+                </Card>
             </Row>
-        </>
+            <Row>
+                <Card>
+                    <ButtonDropdown className="mr-1" isOpen="true">
+                        <DropdownToggle caret color="primary">
+                            Button
+                </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem header>Header</DropdownItem>
+                            <DropdownItem disabled>Action Disabled</DropdownItem>
+                            <DropdownItem>Action</DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>Another Action</DropdownItem>
+                        </DropdownMenu>
+                    </ButtonDropdown>
+                </Card>
+            </Row>
+        </ul>
     );
 }
 export default Artiference;
