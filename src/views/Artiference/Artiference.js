@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 //import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Bar, Line } from 'react-chartjs-2';
 import {
-    Badge,
-    Button,
+    //    Badge,
+    //    Button,
     ButtonDropdown,
-    ButtonGroup,
-    ButtonToolbar,
+    //    ButtonGroup,
+    //    ButtonToolbar,
     Card,
     CardBody,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    Col,
-    Dropdown,
+    //    CardFooter,
+    //    CardHeader,
+    //   CardTitle,
+    //    Col,
+    //    Dropdown,
     DropdownItem,
     DropdownMenu,
     DropdownToggle,
-    Progress,
+    //    Progress,
     Row,
-    Table,
+    //    Table,
 } from 'reactstrap';
 
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
@@ -130,14 +130,18 @@ function Artiference() {
     const [value, setValue] = useState('');
     // getData from Backend
     async function getAxios(commentId) {
-        const res = await axios.get("http://192.168.2.154:32353")
-        setValue(res.data);
+        const res = await axios.get("http://192.168.2.154:32353/lotto/815").then(res => {
+            var jsonData = res.data;
+            console.log(jsonData);
+            setValue(jsonData.test);
+        })
+        //setValue(res);
     };
 
     // DidMount
     useEffect(() => {
         getAxios();
-    }, []);
+    }, [value]);
 
     return (
         <ul>
